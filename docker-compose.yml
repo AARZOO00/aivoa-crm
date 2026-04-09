@@ -1,0 +1,64 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: aivoa_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: aivoa
+      POSTGRES_PASSWORD: aivoa_password
+      POSTGRES_DB: aivoa_crm
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aivoa -d aivoa_crm"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: aivoa_backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql+asyncpg://aivoa:aivoa_password@postgres:5432/aivoa_crm
+      GROQ_API_KEY: ${GROQ_API_KEY}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-supersecretchangeme}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: http://localhost:8000
+    container_name: aivoa_frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  default:
+    name: aivoa_network

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AIVOA Life Sciences CRM - AI-First HCP Interaction Module" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#4F46E5" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#3730A3" />
+    <title>AIVOA CRM — HCP Interaction Module</title>
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--
+      CRITICAL: This script runs SYNCHRONOUSLY before any module loads.
+      It kills all stale service workers (Firebase, Workbox, PWA) that
+      may have been cached from a different project on localhost:5173.
+      
+      The firebase.js SyntaxError you see is caused by a stale Firebase
+      service worker from another project serving cached files.
+      This script eliminates it permanently.
+    -->
+    <script>
+      (function() {
+        if (!('serviceWorker' in navigator)) return
+
+        // Step 1: Unregister ALL existing service workers immediately
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          registrations.forEach(function(reg) {
+            reg.unregister().then(function(success) {
+              if (success) console.log('[AIVOA] Killed SW:', reg.scope)
+            })
+          })
+        })
+
+        // Step 2: Wipe every cache (Firebase SW caches, Workbox, etc.)
+        if ('caches' in window) {
+          caches.keys().then(function(cacheNames) {
+            cacheNames.forEach(function(name) {
+              caches.delete(name)
+              console.log('[AIVOA] Deleted cache:', name)
+            })
+          })
+        }
+
+        // Step 3: Register our own minimal killer SW
+        // It will immediately claim all clients and wipe remaining caches
+        navigator.serviceWorker.register('/sw.js', { scope: '/' })
+          .then(function(reg) {
+            console.log('[AIVOA] Killer SW registered at', reg.scope)
+          })
+          .catch(function(err) {
+            console.warn('[AIVOA] SW registration failed (OK in dev):', err.message)
+          })
+
+        // Step 4: Listen for SW message to reload after cleanup
+        navigator.serviceWorker.addEventListener('message', function(event) {
+          if (event.data && event.data.type === 'SW_ACTIVATED') {
+            // Only reload if the page has been loaded for more than 1 second
+            // (avoids infinite reload loops)
+            if (performance.now() > 1000) {
+              console.log('[AIVOA] SW cleanup complete, reloading...')
+              window.location.reload()
+            }
+          }
+        })
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

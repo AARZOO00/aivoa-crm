@@ -1,0 +1,17 @@
+{
+  "name": "AIVOA Life Sciences CRM",
+  "short_name": "AIVOA CRM",
+  "description": "AI-First CRM HCP Module for Medical Sales Representatives",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8FAFC",
+  "theme_color": "#2563EB",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

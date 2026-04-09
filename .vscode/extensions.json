@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "ms-python.pylance",
+    "ms-python.black-formatter",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "dbaeumer.vscode-eslint",
+    "ms-azuretools.vscode-docker",
+    "mtxr.sqltools",
+    "humao.rest-client"
+  ]
+}
