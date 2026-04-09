@@ -51,8 +51,7 @@ export default function App() {
         <Route path="/login" element={<LoginPage />} />
 
         {/* Redirect root to dashboard */}
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-
+        <Route path="/" element={<LandingPage />} />
         {/* Protected pages — each in MainLayout */}
         <Route path="/dashboard"       element={<Protected><Dashboard /></Protected>} />
         <Route path="/log-interaction" element={<Protected><LogInteractionScreen /></Protected>} />
