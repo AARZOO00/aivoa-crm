@@ -5,7 +5,7 @@ import { logout } from '@/store/slices/authSlice'
 
 const NAV = [
   { to: '/dashboard',       label: 'Dashboard',      icon: (
-    <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4"><path d="M2 10a8 8 0 1116 0A8 8 0 012 10zm8-4a1 1 0 100 2 1 1 0 000-2zm0 6a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" fillRule="evenodd"/><rect x="2" y="2" width="7" height="7" rx="1"/><rect x="11" y="2" width="7" height="7" rx="1"/><rect x="2" y="11" width="7" height="7" rx="1"/><rect x="11" y="11" width="7" height="7" rx="1"/></svg>
+    <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4"><rect x="2" y="2" width="7" height="7" rx="1"/><rect x="11" y="2" width="7" height="7" rx="1"/><rect x="2" y="11" width="7" height="7" rx="1"/><rect x="11" y="11" width="7" height="7" rx="1"/></svg>
   )},
   { to: '/log-interaction', label: 'Log Interaction', badge: 'AI', icon: (
     <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4"><path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd"/></svg>
@@ -19,10 +19,44 @@ const NAV = [
   { to: '/analytics',       label: 'Analytics',      icon: (
     <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
   )},
-  { to: '/settings',         label: 'Settings',       icon: (
+  { to: '/settings',        label: 'Settings',       icon: (
     <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4"><path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd"/></svg>
   )},
 ]
+
+const LogoIcon = () => (
+  <div className="w-8 h-8 rounded-lg flex-shrink-0 overflow-hidden" style={{ background: 'linear-gradient(135deg,#6366f1,#8b5cf6)' }}>
+    <svg viewBox="200 40 240 240" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+      <defs>
+        <linearGradient id="pg2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#6366f1"/>
+          <stop offset="100%" stopColor="#8b5cf6"/>
+        </linearGradient>
+      </defs>
+      <rect x="200" y="40" width="240" height="240" rx="40" fill="url(#pg2)"/>
+      <rect x="314" y="80" width="12" height="160" rx="6" fill="white" opacity="0.9"/>
+      <rect x="254" y="140" width="132" height="12" rx="6" fill="white" opacity="0.9"/>
+      <path d="M248 108 Q280 90 320 108 Q360 126 392 108" stroke="#a5b4fc" strokeWidth="4" fill="none" strokeLinecap="round"/>
+      <path d="M248 148 Q280 130 320 148 Q360 166 392 148" stroke="#a5b4fc" strokeWidth="4" fill="none" strokeLinecap="round"/>
+      <path d="M248 188 Q280 170 320 188 Q360 206 392 188" stroke="#a5b4fc" strokeWidth="4" fill="none" strokeLinecap="round"/>
+      <path d="M248 228 Q280 210 320 228 Q360 246 392 228" stroke="#a5b4fc" strokeWidth="4" fill="none" strokeLinecap="round"/>
+      <path d="M248 108 Q280 126 320 108 Q360 90 392 108" stroke="#c4b5fd" strokeWidth="4" fill="none" strokeLinecap="round" opacity="0.7"/>
+      <path d="M248 148 Q280 166 320 148 Q360 130 392 148" stroke="#c4b5fd" strokeWidth="4" fill="none" strokeLinecap="round" opacity="0.7"/>
+      <path d="M248 188 Q280 206 320 188 Q360 170 392 188" stroke="#c4b5fd" strokeWidth="4" fill="none" strokeLinecap="round" opacity="0.7"/>
+      <path d="M248 228 Q280 246 320 228 Q360 210 392 228" stroke="#c4b5fd" strokeWidth="4" fill="none" strokeLinecap="round" opacity="0.7"/>
+      <circle cx="270" cy="108" r="5" fill="white" opacity="0.9"/>
+      <circle cx="370" cy="108" r="5" fill="white" opacity="0.9"/>
+      <circle cx="270" cy="148" r="5" fill="white" opacity="0.9"/>
+      <circle cx="370" cy="148" r="5" fill="white" opacity="0.9"/>
+      <circle cx="270" cy="188" r="5" fill="white" opacity="0.9"/>
+      <circle cx="370" cy="188" r="5" fill="white" opacity="0.9"/>
+      <circle cx="270" cy="228" r="5" fill="white" opacity="0.9"/>
+      <circle cx="370" cy="228" r="5" fill="white" opacity="0.9"/>
+      <rect x="313" y="148" width="14" height="24" rx="4" fill="white" opacity="0.95"/>
+      <rect x="308" y="153" width="24" height="14" rx="4" fill="white" opacity="0.95"/>
+    </svg>
+  </div>
+)
 
 export default function Sidebar() {
   const dispatch  = useDispatch()
@@ -43,10 +77,7 @@ export default function Sidebar() {
 
       {/* Logo */}
       <div className="flex items-center h-16 px-4 border-b border-white/5 flex-shrink-0 gap-3">
-        <div className="w-8 h-8 rounded-lg flex-shrink-0 flex items-center justify-center"
-          style={{ background: 'linear-gradient(135deg,#6366f1,#8b5cf6)' }}>
-          <span className="text-white font-black text-sm">A</span>
-        </div>
+        <LogoIcon />
         {!collapsed && (
           <div className="flex-1 min-w-0">
             <div className="text-white font-bold text-sm leading-tight tracking-tight">AIVOA</div>
